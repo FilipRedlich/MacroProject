@@ -1,3 +1,3 @@
 import macro
 
-macro.pressKey('E',3)
+macro.pressKey('E',10,0.2)
