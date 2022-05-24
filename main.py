@@ -10,16 +10,13 @@ def findMousePosition():
     except KeyboardInterrupt:
         print("\nDone")
 
-def pressKey(key):
+def pressKey(key,press=1,inter=0):
     try:
-        while True:
-            pyautogui.press(key,presses=1,interval=0.5)
+        pyautogui.press(key,press,inter)
     except KeyboardInterrupt:
         print("\nDone")
 
 if __name__ == '__main__':
     width, height = pyautogui.size()
-    findMousePosition()
-    pressKey("F")
-
-    
+    #findMousePosition()
+    pressKey("F",3)
