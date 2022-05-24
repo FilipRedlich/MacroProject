@@ -1,9 +1,9 @@
 import tkinter as tk
-import os
+from os import system
 
 def runcript():
     command = 'python customScript.py'
-    os.system(command)
+    system(command)
 
 def loadScript():
     0
