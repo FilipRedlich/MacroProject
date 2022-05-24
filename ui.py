@@ -2,8 +2,10 @@ import tkinter as tk
 from os import system
 
 def runcript():
+    root.iconify()
     command = 'python customScript.py'
     system(command)
+    root.deiconify()
 
 def loadScript():
     0
