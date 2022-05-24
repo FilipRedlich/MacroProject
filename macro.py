@@ -1,5 +1,8 @@
 import pyautogui
 
+width, height = pyautogui.size()
+
+#func that print mouse position updating in real time
 def findMousePosition():
     try:
         while True:
@@ -10,6 +13,7 @@ def findMousePosition():
     except KeyboardInterrupt:
         print("\nDone")
 
+#func to press key
 def pressKey(key,presses=1,interval=0):
     try:
         pyautogui.press(key,presses,interval)
@@ -17,6 +21,5 @@ def pressKey(key,presses=1,interval=0):
         print("\nDone")
 
 if __name__ == '__main__':
-    width, height = pyautogui.size()
-    #findMousePosition()
-    pressKey("F",3)
+    findMousePosition()
+    #pressKey("F",3)
