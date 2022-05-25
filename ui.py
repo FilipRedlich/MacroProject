@@ -1,12 +1,15 @@
 import tkinter as tk
 from os import system
+import customScript
 
 def runcript():
     #hide window
     root.iconify()
     #run custon script
-    command = 'python customScript.py'
-    system(command)
+
+    #system('python customScript.py')
+    customScript.run()
+
     #bring back window after script end
     root.deiconify()
 

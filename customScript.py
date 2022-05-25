@@ -1,3 +1,3 @@
 import macro
-
-macro.pressKey('E',10,0.2)
+def run():
+    macro.pressKey('E',20,0.2)
