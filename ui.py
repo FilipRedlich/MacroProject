@@ -19,10 +19,10 @@ def loadScript():
 def createScript():
     #create custom script and add macro import
     f = open("customScript.py", "w")
-    f.write("import macro\n\n")
+    f.write("import macro\n\ndef run():\n")
 
     #add custom commands to script
-    f.write("macro.pressKey('E',10,0.2)\n")
+    f.write("\tmacro.pressKey('E',10,0.2)\n")
 
     #close file
     f.close()
