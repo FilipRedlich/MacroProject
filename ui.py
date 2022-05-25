@@ -16,18 +16,10 @@ def runcript():
 def loadScript():
     0
 
-def addLine(action="press",key="F"):
-    f = open("customScript.py", "a")
-    f.write("\t")
-    if(action=="press"):
-        f.write("macro.pressKey('"+key+"',20,0.2)")
-    f.write("\n")
-    f.close()
-
 def createScript():
     #create custom script and add macro import
     f = open("customScript.py", "w")
-    f.write("import macro\n\ndef run():\n")
+    f.write("import macro\n\n")
 
     #add custom commands to script
     #f.write("\tmacro.pressKey('E',10,0.2)\n")
@@ -35,7 +27,15 @@ def createScript():
 
     #close file
     f.close()
+    #TEMP - add line
     addLine()
+
+def addLine(action="press",key="E"):
+    f = open("customScript.py", "a")
+    if(action=="press"):
+        f.write("macro.pressKey('"+key+"',20,0.2)")
+    f.write("\n")
+    f.close()
 
 if __name__ == '__main__':
     #bind main window to root
