@@ -1,14 +1,14 @@
 import tkinter as tk
 from os import system
-import customScript
+#import customScript
 
 def runcript():
     #hide window
     root.iconify()
     #run custon script
 
-    #system('python customScript.py')
-    customScript.run()
+    system('python customScript.py')
+    #customScript.run()
 
     #bring back window after script end
     root.deiconify()
@@ -16,16 +16,26 @@ def runcript():
 def loadScript():
     0
 
+def addLine(action="press",key="F"):
+    f = open("customScript.py", "a")
+    f.write("\t")
+    if(action=="press"):
+        f.write("macro.pressKey('"+key+"',20,0.2)")
+    f.write("\n")
+    f.close()
+
 def createScript():
     #create custom script and add macro import
     f = open("customScript.py", "w")
     f.write("import macro\n\ndef run():\n")
 
     #add custom commands to script
-    f.write("\tmacro.pressKey('E',10,0.2)\n")
+    #f.write("\tmacro.pressKey('E',10,0.2)\n")
+    
 
     #close file
     f.close()
+    addLine()
 
 if __name__ == '__main__':
     #bind main window to root

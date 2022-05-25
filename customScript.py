@@ -1,3 +1,7 @@
 import macro
+
 def run():
-    macro.pressKey('E',20,0.2)
+	macro.pressKey('U',20,0.2)
+
+if __name__ == '__main__':
+    run()
