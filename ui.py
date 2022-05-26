@@ -42,25 +42,28 @@ if __name__ == '__main__':
     root = tk.Tk()
 
     #create main window and add background to it
-    canvas = tk.Canvas(root, height=600, width=600, bg="lightblue")
-    canvas.pack()
+    bgCanvas = tk.Canvas(root, height=600, width=600, bg="lightblue")
+    bgCanvas.pack()
 
-    #add frame inside main window
-    frame = tk.Frame(root, bg="black")
-    frame.place(relwidth=0.9,relheight=0.9,relx=0.05,rely=0.05)
+    #add canvas inside main window
+    mainCanvas = tk.Canvas(root, bg="black")
+    mainCanvas.place(relwidth=0.9,relheight=0.9,relx=0.05,rely=0.05)
 
     #add button on bottom side of the window that run functions
-    runFile = tk.Button(frame, text="Run Script", fg="black", bg="white", padx=7, pady=3, command=runcript)
+    runFile = tk.Button(mainCanvas, text="Run Script", fg="black", bg="white", padx=7, pady=3, command=runcript)
     runFile.pack(fill="both",side='bottom')
 
-    openFile = tk.Button(frame, text="Load Script", fg="black", bg="white", padx=7, pady=3, command=loadScript)
+    openFile = tk.Button(mainCanvas, text="Load Script", fg="black", bg="white", padx=7, pady=3, command=loadScript)
     openFile.pack(fill="both",side='bottom')
 
-    saveFile = tk.Button(frame, text="Create Script", fg="black", bg="white", padx=7, pady=3, command=createScript)
+    saveFile = tk.Button(mainCanvas, text="Create Script", fg="black", bg="white", padx=7, pady=3, command=createScript)
     saveFile.pack(fill="both",side='bottom')
 
-    scriptFrame = tk.Frame(frame, bg='white')
-    scriptFrame.place(relwidth=1,relheight=0.83)
+
+    scriptSpace = tk.Canvas(mainCanvas, bg='white')
+    scriptSpace.place(relwidth=1,relheight=0.83)
+
+    scriptSpace.create_text(100,50,text="Lorem ipsum dolor sit amet")
 
     #loop and refresh window 
     root.mainloop()
