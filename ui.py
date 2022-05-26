@@ -15,7 +15,9 @@ def runcript():
     root.deiconify()
 
 def loadScript():
+    #read file
     f = open("customScript.pyw", "r")
+    #load saved script (clear window then load from file)
     text.delete('1.0','end')
     text.insert(1.0,f.read())
 
