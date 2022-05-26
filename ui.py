@@ -58,10 +58,11 @@ if __name__ == '__main__':
     saveFile = tk.Button(mainCanvas, text="Create Script", fg="black", bg="white", padx=7, pady=3, command=createScript)
     saveFile.pack(fill="both",side='bottom')
 
-
+    #add interactive space to modify custom script
     scriptSpace = tk.Canvas(mainCanvas, bg='white')
     scriptSpace.place(relwidth=1,relheight=0.83)
 
+    #textbox that loads script or sets up textbox
     text = tk.Text(scriptSpace, width=200, height=200)
     try:
         loadScript()
