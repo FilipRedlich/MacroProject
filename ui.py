@@ -1,15 +1,15 @@
 import tkinter as tk
-from os import system
+import subprocess
 
 def runcript():
     #hide window
-    root.iconify()
-    #run custon script
+    #root.iconify()
 
-    system('python customScript.py')
+    #run custon script
+    subprocess.Popen('python customScript.py', creationflags = subprocess.CREATE_NO_WINDOW)
 
     #bring back window after script end
-    root.deiconify()
+    #root.deiconify()
 
 def loadScript():
     f = open("customScript.py", "r")
