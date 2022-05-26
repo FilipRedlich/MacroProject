@@ -46,18 +46,21 @@ if __name__ == '__main__':
     canvas.pack()
 
     #add frame inside main window
-    frame = tk.Frame(root, bg="white")
-    frame.place(relwidth=0.8,relheight=0.7,relx=0.1,rely=0.1)
+    frame = tk.Frame(root, bg="black")
+    frame.place(relwidth=0.9,relheight=0.9,relx=0.05,rely=0.05)
 
     #add button on bottom side of the window that run functions
-    runFile = tk.Button(root, text="Run Script", fg="black", bg="white", padx=7, pady=3, command=runcript)
-    runFile.pack(fill="both")
+    runFile = tk.Button(frame, text="Run Script", fg="black", bg="white", padx=7, pady=3, command=runcript)
+    runFile.pack(fill="both",side='bottom')
 
-    openFile = tk.Button(root, text="Load Script", fg="black", bg="white", padx=7, pady=3, command=loadScript)
-    openFile.pack(fill="both")
+    openFile = tk.Button(frame, text="Load Script", fg="black", bg="white", padx=7, pady=3, command=loadScript)
+    openFile.pack(fill="both",side='bottom')
 
-    saveFile = tk.Button(root, text="Create Script", fg="black", bg="white", padx=7, pady=3, command=createScript)
-    saveFile.pack(fill="both")
+    saveFile = tk.Button(frame, text="Create Script", fg="black", bg="white", padx=7, pady=3, command=createScript)
+    saveFile.pack(fill="both",side='bottom')
+
+    scriptFrame = tk.Frame(frame, bg='white')
+    scriptFrame.place(relwidth=1,relheight=0.83)
 
     #loop and refresh window 
     root.mainloop()
