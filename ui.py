@@ -14,7 +14,8 @@ def runcript():
     root.deiconify()
 
 def loadScript():
-    0
+    getText = text.get('1.0','end')
+    text.insert('1.0',getText)
 
 def createScript():
     #create custom script and add macro import
@@ -63,7 +64,9 @@ if __name__ == '__main__':
     scriptSpace = tk.Canvas(mainCanvas, bg='white')
     scriptSpace.place(relwidth=1,relheight=0.83)
 
-    scriptSpace.create_text(100,50,text="Lorem ipsum dolor sit amet")
+    text = tk.Text(scriptSpace, width=200, height=200)
+    text.insert('1.0','lorem ipsum')
+    text.pack()
 
     #loop and refresh window 
     root.mainloop()
