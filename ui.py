@@ -14,22 +14,25 @@ def runcript():
     root.deiconify()
 
 def loadScript():
-    getText = text.get('1.0','end')
-    text.insert('1.0',getText)
+    f = open("customScript.py", "r")
+    text.delete('1.0','end')
+    text.insert(1.0,f.read())
+
+    #getText = text.get('1.0','end')
+    #text.insert('1.0',getText)
 
 def createScript():
     #create custom script and add macro import
     f = open("customScript.py", "w")
-    f.write("import macro\n\n")
-
-    #add custom commands to script
-    #f.write("\tmacro.pressKey('E',10,0.2)\n")
-    
+    #f.write("from macro import *\n\n")
+    getText = text.get('1.0','end')
+    f.write(getText)
 
     #close file
     f.close()
+
     #TEMP - add line
-    addLine()
+    #addLine()
 
 def addLine(action="press",key="E"):
     f = open("customScript.py", "a")
@@ -65,7 +68,7 @@ if __name__ == '__main__':
     scriptSpace.place(relwidth=1,relheight=0.83)
 
     text = tk.Text(scriptSpace, width=200, height=200)
-    text.insert('1.0','lorem ipsum')
+    text.insert('1.0','from macro import *\n\n')
     text.pack()
 
     #loop and refresh window 
