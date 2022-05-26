@@ -68,7 +68,10 @@ if __name__ == '__main__':
     scriptSpace.place(relwidth=1,relheight=0.83)
 
     text = tk.Text(scriptSpace, width=200, height=200)
-    text.insert('1.0','from macro import *\n\n')
+    try:
+        loadScript()
+    except:
+        text.insert('1.0','from macro import *\n\n')
     text.pack()
 
     #loop and refresh window 
