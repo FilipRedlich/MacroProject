@@ -4,6 +4,19 @@ import subprocess
 def runcript():
     #hide window
     root.iconify()
+
+    f = open("macro.py", "w")
+
+    f.write("""import pyautogui
+
+#func to press key
+def pressKey(key,presses=1,interval=0):
+    try:
+        pyautogui.press(key,presses,interval)
+    except KeyboardInterrupt:
+        print("Done")""")
+
+    f.close()
     #save current script
     createScript()
     #run custon script
