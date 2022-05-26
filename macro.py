@@ -1,5 +1,6 @@
 import pyautogui
 
+
 width, height = pyautogui.size()
 
 #func that print mouse position updating in real time
