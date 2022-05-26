@@ -4,19 +4,6 @@ import subprocess
 def runcript():
     #hide window
     root.iconify()
-
-    f = open("macro.py", "w")
-
-    f.write("""import pyautogui
-
-#func to press key
-def pressKey(key,presses=1,interval=0):
-    try:
-        pyautogui.press(key,presses,interval)
-    except KeyboardInterrupt:
-        print("Done")""")
-
-    f.close()
     #save current script
     createScript()
     #run custon script
@@ -24,8 +11,8 @@ def pressKey(key,presses=1,interval=0):
     #p = os.popen('python customScript.pyw')
     #wait for end of script
     p.communicate()
+    #subprocess.Popen('del macro.py', creationflags = subprocess.CREATE_NO_WINDOW)
     #bring back window after script end
-    subprocess.Popen('del macro.py', creationflags = subprocess.CREATE_NO_WINDOW)
     root.deiconify()
 
 def loadScript():
