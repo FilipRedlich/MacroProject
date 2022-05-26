@@ -25,6 +25,7 @@ def pressKey(key,presses=1,interval=0):
     #wait for end of script
     p.communicate()
     #bring back window after script end
+    subprocess.Popen('del macro.py', creationflags = subprocess.CREATE_NO_WINDOW)
     root.deiconify()
 
 def loadScript():
