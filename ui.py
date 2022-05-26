@@ -1,6 +1,5 @@
 import tkinter as tk
 from os import system
-#import customScript
 
 def runcript():
     #hide window
@@ -8,7 +7,6 @@ def runcript():
     #run custon script
 
     system('python customScript.py')
-    #customScript.run()
 
     #bring back window after script end
     root.deiconify()
@@ -17,9 +15,6 @@ def loadScript():
     f = open("customScript.py", "r")
     text.delete('1.0','end')
     text.insert(1.0,f.read())
-
-    #getText = text.get('1.0','end')
-    #text.insert('1.0',getText)
 
 def createScript():
     #create custom script and add macro import
