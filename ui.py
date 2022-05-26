@@ -3,22 +3,25 @@ import subprocess
 
 def runcript():
     #hide window
-    #root.iconify()
-
+    root.iconify()
+    #save current script
+    createScript()
     #run custon script
-    subprocess.Popen('python customScript.py', creationflags = subprocess.CREATE_NO_WINDOW)
-
+    p = subprocess.Popen('python customScript.pyw', creationflags = subprocess.CREATE_NO_WINDOW)
+    #p = os.popen('python customScript.pyw')
+    #wait for end of script
+    p.communicate()
     #bring back window after script end
-    #root.deiconify()
+    root.deiconify()
 
 def loadScript():
-    f = open("customScript.py", "r")
+    f = open("customScript.pyw", "r")
     text.delete('1.0','end')
     text.insert(1.0,f.read())
 
 def createScript():
     #create custom script and add macro import
-    f = open("customScript.py", "w")
+    f = open("customScript.pyw", "w")
     #f.write("from macro import *\n\n")
     getText = text.get('1.0','end')
     f.write(getText)
@@ -30,7 +33,7 @@ def createScript():
     #addLine()
 
 def addLine(action="press",key="E"):
-    f = open("customScript.py", "a")
+    f = open("customScript.pyw", "a")
     if(action=="press"):
         f.write("macro.pressKey('"+key+"',20,0.2)")
     f.write("\n")
