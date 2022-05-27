@@ -61,17 +61,6 @@ def createScript():
     #close file
     f.close()
 
-    #TEMP - add line
-    #addLine()
-
-#add line to file depending on action type
-def addLine(action="press",key="E"):
-    f = open("customScript.pyw", "a")
-    if(action=="press"):
-        f.write("macro.pressKey('"+key+"',20,0.2)")
-    f.write("\n")
-    f.close()
-
 if __name__ == '__main__':
     #bind main window to root
     root = tk.Tk()
