@@ -113,8 +113,8 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("pressKey","testFunc",'a','b','c','g')
-        list[i].set("pressKey")
+        list[i]['values'] = ("pressKey","testFunc")
+        #list[i].set("pressKey")
         list[i].pack()
         #textbox that loads script or sets up textbox
         text.append(tk.Text(scriptSpace2, height=1))
@@ -123,6 +123,5 @@ if __name__ == '__main__':
 
     #listener for select
     #list[0].bind('<<ComboboxSelected>>', text[0].insert('end',str(list[0].get())))
-
     #loop and refresh window 
     root.mainloop()
