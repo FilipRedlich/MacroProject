@@ -16,7 +16,12 @@ def runcript():
     #bring back window after script end
     root.deiconify()
 
-def loadScript(i):
+def loadScript():
+    global size
+    for i in range(0,size):
+        loadLine(i)
+
+def loadLine(i):
     #read file
     f = open("customScript.pyw", "r")
     #load saved script (clear window then load from file)
@@ -29,9 +34,11 @@ def createScript():
     #create custom script and add macro import
     f = open("customScript.pyw", "w")
     #f.write("from macro import *\n\n")
-    for i in range(0,5):
+    global size
+    for i in range(0,size):
         getText = str(text[i].get('1.0','end'))
-        f.write(getText)
+        if getText!="key numberOfPresses interval\n":
+            f.write(getText)
 
     #close file
     f.close()
@@ -50,6 +57,8 @@ def addLine(action="press",key="E"):
 if __name__ == '__main__':
     #bind main window to root
     root = tk.Tk()
+
+    size=5
 
     #create main window and add background to it
     bgCanvas = tk.Canvas(root, height=600, width=600, bg="lightblue")
@@ -83,7 +92,7 @@ if __name__ == '__main__':
 
     text=[]
     list=[]
-    for i in range(0,5):
+    for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
         list[i]['values'] = ("Press Key","Test Func",'a','b','c','g')
@@ -92,9 +101,9 @@ if __name__ == '__main__':
         #textbox that loads script or sets up textbox
         text.append(tk.Text(scriptSpace2, height=1))
         try:
-            loadScript(i)
+            loadLine(i)
         except:
-            text[i].insert('1.0','key presses interval')
+            text[i].insert('1.0','key numberOfPresses interval')
         text[i].pack()
 
     #listener for select
