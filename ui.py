@@ -60,9 +60,8 @@ def createScript():
     #close file
     f.close()
 
-def addRow():
+def addRow(event):
     global size
-    print(size)
     for i in range(size,size+1):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
@@ -74,12 +73,14 @@ def addRow():
         loadLine(i)
         text[i].pack()
         size+=1
+    list[size-2].unbind('<<ComboboxSelected>>')
+    list[size-1].bind('<<ComboboxSelected>>', addRow)
 
 if __name__ == '__main__':
     #bind main window to root
     root = tk.Tk('Macro')
 
-    size=3
+    size=4
 
     #create main window and add background to it
     bgCanvas = tk.Canvas(root, height=600, width=600, bg="lightblue")
@@ -135,8 +136,6 @@ if __name__ == '__main__':
         text[i].pack()
 
     #listener for select
-    list[size-1].bind('<<ComboboxSelected>>', addRow())
-    testB = tk.Button(mainCanvas, text="TEST", fg="black", bg="white", padx=7, pady=3, command=addRow)
-    testB.pack(fill="both",side='bottom')
+    list[size-1].bind('<<ComboboxSelected>>', addRow)
     #loop and refresh window 
     root.mainloop()
