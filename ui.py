@@ -69,8 +69,19 @@ if __name__ == '__main__':
     scriptSpace = tk.Canvas(mainCanvas, bg='white')
     scriptSpace.place(relwidth=1,relheight=0.83)
 
+    #listbox for choosing options
+    list = tk.Listbox(scriptSpace, height=5)
+    list.insert(1,"Press Key")
+    list.insert(2,"Test Func")
+    list.pack()
+
+    #listener for select/single-click
+    list.bind("<<ListboxSelect>>",lambda e: text.insert('end',str(list.curselection())))
+    #listener for double-click
+    list.bind("<Double-1>",lambda e: print(list.curselection()))
+
     #textbox that loads script or sets up textbox
-    text = tk.Text(scriptSpace, width=200, height=200)
+    text = tk.Text(scriptSpace, width=100, height=100)
     try:
         loadScript()
     except:
