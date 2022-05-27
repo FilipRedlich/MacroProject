@@ -57,15 +57,29 @@ def createScript():
         getText = getText[ff:]
         if getText!="('key',numberOfPresses,interval)\n" and ff!=-1:
             f.write(getAction+getText)
-
     #close file
     f.close()
 
+def addRow():
+    global size
+    print(size)
+    for i in range(size,size+1):
+        #combobox for choosing options
+        list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
+        list[i]['values'] = ("pressKey","testFunc")
+        #list[i].set("pressKey")
+        list[i].pack()
+        #textbox that loads script or sets up textbox
+        text.append(tk.Text(scriptSpace2, height=1))
+        loadLine(i)
+        text[i].pack()
+        size+=1
+
 if __name__ == '__main__':
     #bind main window to root
-    root = tk.Tk()
+    root = tk.Tk('Macro')
 
-    size=5
+    size=3
 
     #create main window and add background to it
     bgCanvas = tk.Canvas(root, height=600, width=600, bg="lightblue")
@@ -95,8 +109,7 @@ if __name__ == '__main__':
     scriptSpace2 = tk.Canvas(scriptSpace, bg='white')
     scriptSpace2.place(relwidth=0.8,relx=0.2)
     
-    scriptSpace1.grid(column=0,row=0)
-    scriptSpace2.grid(column=1,row=0,columnspan=3)
+
 
     #description to rows
     descText1 = tk.Text(scriptSpace1, height=1, width=15)
@@ -122,6 +135,8 @@ if __name__ == '__main__':
         text[i].pack()
 
     #listener for select
-    #list[0].bind('<<ComboboxSelected>>', text[0].insert('end',str(list[0].get())))
+    list[size-1].bind('<<ComboboxSelected>>', addRow())
+    testB = tk.Button(mainCanvas, text="TEST", fg="black", bg="white", padx=7, pady=3, command=addRow)
+    testB.pack(fill="both",side='bottom')
     #loop and refresh window 
     root.mainloop()
