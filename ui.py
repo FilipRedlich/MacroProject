@@ -16,19 +16,22 @@ def runcript():
     #bring back window after script end
     root.deiconify()
 
-def loadScript():
+def loadScript(i):
     #read file
     f = open("customScript.pyw", "r")
     #load saved script (clear window then load from file)
-    text.delete('1.0','end')
-    text.insert(1.0,f.read())
+    text[i].delete('1.0','end')
+    temp = f.read().splitlines()
+    text[i].insert(1.0,temp[i])
+    f.close()
 
 def createScript():
     #create custom script and add macro import
     f = open("customScript.pyw", "w")
     #f.write("from macro import *\n\n")
-    getText = text.get('1.0','end')
-    f.write(getText)
+    for i in range(0,5):
+        getText = str(text[i].get('1.0','end'))
+        f.write(getText)
 
     #close file
     f.close()
@@ -74,30 +77,28 @@ if __name__ == '__main__':
     scriptSpace1.place(relwidth=0.2)
     scriptSpace2 = tk.Canvas(scriptSpace, bg='white')
     scriptSpace2.place(relwidth=0.8,relx=0.2)
-
-    #combobox for choosing options
-    list1 = ttk.Combobox(scriptSpace1, textvariable=tk.StringVar())
-    list1['values'] = ("Press Key","Test Func",'a','b','c','g')
-    list1.set("Press Key")
-    list1.pack()
-
-    list2 = ttk.Combobox(scriptSpace1, textvariable=tk.StringVar())
-    list2['values'] = ("Press Key","Test Func",'a','b','c','g')
-    list2.set("Press Key")
-    list2.pack()
-
     
+    scriptSpace1.grid(column=0,row=0)
+    scriptSpace2.grid(column=1,row=0,columnspan=3)
 
-    #textbox that loads script or sets up textbox
-    text = tk.Text(scriptSpace2, height=1)
-    try:
-        loadScript()
-    except:
-        text.insert('1.0','from macro import *\n\n')
-    text.pack()
+    text=[]
+    list=[]
+    for i in range(0,5):
+        #combobox for choosing options
+        list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
+        list[i]['values'] = ("Press Key","Test Func",'a','b','c','g')
+        list[i].set("Press Key")
+        list[i].pack()
+        #textbox that loads script or sets up textbox
+        text.append(tk.Text(scriptSpace2, height=1))
+        try:
+            loadScript(i)
+        except:
+            text[i].insert('1.0','key presses interval')
+        text[i].pack()
 
     #listener for select
-    list1.bind('<<ComboboxSelected>>', text.insert('end',str(list1.get())))
+    #list[0].bind('<<ComboboxSelected>>', text[0].insert('end',str(list[0].get())))
 
     #loop and refresh window 
     root.mainloop()
