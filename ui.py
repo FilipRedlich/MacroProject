@@ -28,7 +28,9 @@ def loadLine(i):
         #load saved script (clear window then load from file)
         text[i].delete('1.0','end')
         temp = f.read().splitlines()
-        text[i].insert(1.0,temp[i])
+        str = temp[i+2]
+        str = str.replace('pressKey','')
+        text[i].insert(1.0,str)
         f.close()
     except:
         text[i].insert('1.0','key numberOfPresses interval')
@@ -36,7 +38,7 @@ def loadLine(i):
 def createScript():
     #create custom script and add macro import
     f = open("customScript.pyw", "w")
-    #f.write("from macro import *\n\n")
+    f.write("from macro import *\n\n")
     global size
     for i in range(0,size):
         getAction=str(list[i].get())
