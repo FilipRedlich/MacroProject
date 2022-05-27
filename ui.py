@@ -79,8 +79,13 @@ def addRow(event):
 if __name__ == '__main__':
     #bind main window to root
     root = tk.Tk('Macro')
-
-    size=4
+    try:
+        with open("customScript.pyw", 'r') as fp:
+            for count, line in enumerate(fp):
+                pass
+        size = count
+    except:
+        size=1
 
     #create main window and add background to it
     bgCanvas = tk.Canvas(root, height=600, width=600, bg="lightblue")
