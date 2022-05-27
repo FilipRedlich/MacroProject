@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import subprocess
 
 def runcript():
@@ -69,24 +70,34 @@ if __name__ == '__main__':
     scriptSpace = tk.Canvas(mainCanvas, bg='white')
     scriptSpace.place(relwidth=1,relheight=0.83)
 
-    #listbox for choosing options
-    list = tk.Listbox(scriptSpace, height=5)
-    list.insert(1,"Press Key")
-    list.insert(2,"Test Func")
-    list.pack()
+    scriptSpace1 = tk.Canvas(scriptSpace, bg='white')
+    scriptSpace1.place(relwidth=0.2)
+    scriptSpace2 = tk.Canvas(scriptSpace, bg='white')
+    scriptSpace2.place(relwidth=0.8,relx=0.2)
 
-    #listener for select/single-click
-    list.bind("<<ListboxSelect>>",lambda e: text.insert('end',str(list.curselection())))
-    #listener for double-click
-    list.bind("<Double-1>",lambda e: print(list.curselection()))
+    #combobox for choosing options
+    list1 = ttk.Combobox(scriptSpace1, textvariable=tk.StringVar())
+    list1['values'] = ("Press Key","Test Func",'a','b','c','g')
+    list1.set("Press Key")
+    list1.pack()
+
+    list2 = ttk.Combobox(scriptSpace1, textvariable=tk.StringVar())
+    list2['values'] = ("Press Key","Test Func",'a','b','c','g')
+    list2.set("Press Key")
+    list2.pack()
+
+    
 
     #textbox that loads script or sets up textbox
-    text = tk.Text(scriptSpace, width=100, height=100)
+    text = tk.Text(scriptSpace2, height=1)
     try:
         loadScript()
     except:
         text.insert('1.0','from macro import *\n\n')
     text.pack()
+
+    #listener for select
+    list1.bind('<<ComboboxSelected>>', text.insert('end',str(list1.get())))
 
     #loop and refresh window 
     root.mainloop()
