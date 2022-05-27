@@ -29,11 +29,21 @@ def loadLine(i):
         text[i].delete('1.0','end')
         temp = f.read().splitlines()
         str = temp[i+2]
-        str = str.replace('pressKey','')
+        badAction = 1
+        if str.find('pressKey') == 0:
+            list[i].set('pressKey')
+            str = str.replace('pressKey','')
+            badAction = 0
+        if str.find('testFunc') == 0:
+            list[i].set('testFunc')
+            str = str.replace('testFunc','')
+            badAction = 0
+        if badAction == 1:
+            list[i].set('')
         text[i].insert(1.0,str)
         f.close()
     except:
-        text[i].insert('1.0','key numberOfPresses interval')
+        text[i].insert('1.0',"('key',numberOfPresses,interval)")
 
 def createScript():
     #create custom script and add macro import
@@ -41,9 +51,11 @@ def createScript():
     f.write("from macro import *\n\n")
     global size
     for i in range(0,size):
-        getAction=str(list[i].get())
+        getAction = str(list[i].get())
         getText = str(text[i].get('1.0','end'))
-        if getText!="key numberOfPresses interval\n":
+        ff = getText.find('(')
+        getText = getText[ff:]
+        if getText!="('key',numberOfPresses,interval)\n" and ff!=-1:
             f.write(getAction+getText)
 
     #close file
