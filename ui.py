@@ -22,13 +22,16 @@ def loadScript():
         loadLine(i)
 
 def loadLine(i):
-    #read file
-    f = open("customScript.pyw", "r")
-    #load saved script (clear window then load from file)
-    text[i].delete('1.0','end')
-    temp = f.read().splitlines()
-    text[i].insert(1.0,temp[i])
-    f.close()
+    try:
+        #read file
+        f = open("customScript.pyw", "r")
+        #load saved script (clear window then load from file)
+        text[i].delete('1.0','end')
+        temp = f.read().splitlines()
+        text[i].insert(1.0,temp[i])
+        f.close()
+    except:
+        text[i].insert('1.0','key numberOfPresses interval')
 
 def createScript():
     #create custom script and add macro import
@@ -36,9 +39,10 @@ def createScript():
     #f.write("from macro import *\n\n")
     global size
     for i in range(0,size):
+        getAction=str(list[i].get())
         getText = str(text[i].get('1.0','end'))
         if getText!="key numberOfPresses interval\n":
-            f.write(getText)
+            f.write(getAction+getText)
 
     #close file
     f.close()
@@ -95,15 +99,12 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("Press Key","Test Func",'a','b','c','g')
-        list[i].set("Press Key")
+        list[i]['values'] = ("pressKey","testFunc",'a','b','c','g')
+        list[i].set("pressKey")
         list[i].pack()
         #textbox that loads script or sets up textbox
         text.append(tk.Text(scriptSpace2, height=1))
-        try:
-            loadLine(i)
-        except:
-            text[i].insert('1.0','key numberOfPresses interval')
+        loadLine(i)
         text[i].pack()
 
     #listener for select
