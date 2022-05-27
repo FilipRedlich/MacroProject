@@ -112,9 +112,11 @@ if __name__ == '__main__':
     #description to rows
     descText1 = tk.Text(scriptSpace1, height=1, width=15)
     descText1.insert('1.0','Action')
+    descText1['state'] = 'disabled'
     descText1.pack()
     descText2 = tk.Text(scriptSpace2, height=1)
     descText2.insert('1.0','Args')
+    descText2['state'] = 'disabled'
     descText2.pack()
 
     text=[]
