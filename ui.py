@@ -100,6 +100,7 @@ if __name__ == '__main__':
     scriptSpace = tk.Canvas(mainCanvas, bg='white')
     scriptSpace.place(relwidth=1,relheight=0.83)
 
+    #divided main scace in 2 parts
     scriptSpace1 = tk.Canvas(scriptSpace, bg='white')
     scriptSpace1.place(relwidth=0.2)
     scriptSpace2 = tk.Canvas(scriptSpace, bg='white')
@@ -107,6 +108,14 @@ if __name__ == '__main__':
     
     scriptSpace1.grid(column=0,row=0)
     scriptSpace2.grid(column=1,row=0,columnspan=3)
+
+    #description to rows
+    descText1 = tk.Text(scriptSpace1, height=1, width=15)
+    descText1.insert('1.0','Action')
+    descText1.pack()
+    descText2 = tk.Text(scriptSpace2, height=1)
+    descText2.insert('1.0','Args')
+    descText2.pack()
 
     text=[]
     list=[]
