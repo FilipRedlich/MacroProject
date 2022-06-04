@@ -110,8 +110,10 @@ def createScript():
     for i in range(0,size):
         getAction = str(list[i].get())
         getText = str(text[i].get('1.0','end'))
-        if str(list[i].get()) != "":
-            f.write(getAction+' '+getText)
+        print(getText.find('keyToPress'))
+        if getText.find('keyToPress') == -1 and getText.find('numberOfLoops') == -1 and getText.find('mouseButton') == -1:
+            if str(list[i].get()) != "":
+                f.write(getAction+' '+getText)
     #close file
     f.close()
 
