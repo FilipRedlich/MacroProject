@@ -152,6 +152,11 @@ def addRow(event):
         #unbind old list and bind new
         list[size-2].unbind('<<ComboboxSelected>>')
         list[size-1].bind('<<ComboboxSelected>>', addRow)
+        #overwrite scrollbar everytime new row is added to check if needed
+        vsb = tk.Scrollbar(mainCanvas, orient="vertical", command=scrollSpace.yview)
+        vsb.grid(row=0, column=1, sticky='ns')
+        scrollSpace.configure(yscrollcommand=vsb.set)
+        scriptSpace.update_idletasks()
 
 if __name__ == '__main__':
     #bind main window to root
@@ -162,7 +167,7 @@ if __name__ == '__main__':
         with open("customScript.txt", 'r') as fp:
             for count, line in enumerate(fp):
                 pass
-        size = count+2
+        size = count+10
     except:
         size=1
 
@@ -189,14 +194,14 @@ if __name__ == '__main__':
     #add interactive space to modify custom script
     scrollSpace = tk.Canvas(mainCanvas, bg='white')
     scrollSpace.grid(row=0,column=0, sticky="news")
-    
+    #weight value columns of the grid
     scrollSpace.columnconfigure(0,weight=1)
     scrollSpace.columnconfigure(1,weight=6)
-
+    #scrollbar to scroll through script rows
     vsb = tk.Scrollbar(mainCanvas, orient="vertical", command=scrollSpace.yview)
     vsb.grid(row=0, column=1, sticky='ns')
     scrollSpace.configure(yscrollcommand=vsb.set)
-
+    #frame that contains all script lines
     scriptSpace = tk.Frame(scrollSpace, bg="white")
     scrollSpace.create_window((0, 0), window=scriptSpace, anchor='nw')
 
@@ -225,7 +230,9 @@ if __name__ == '__main__':
         text.append(tk.Text(scriptSpace, height=1))
         loadLine(i)
         text[i].grid(column=1,row=i+1)
-
+    
+    #updater that lets tk calculate sizes
+    scriptSpace.update_idletasks()
     #listener for select
     list[size-1].bind('<<ComboboxSelected>>', addRow)
     #set the canvas scrolling region
