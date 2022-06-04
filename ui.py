@@ -155,7 +155,8 @@ def addRow(event):
 
 if __name__ == '__main__':
     #bind main window to root
-    root = tk.Tk('Macro')
+    root = tk.Tk()
+    root.title('Macro')
     #try to get size from file if exist if not size=1
     try:
         with open("customScript.txt", 'r') as fp:
