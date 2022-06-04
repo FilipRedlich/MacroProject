@@ -37,6 +37,8 @@ def runcript():
             if nrLoop > 0:
                 i = loop
                 nrLoop -= 1
+        if list[i].get() == 'click':
+            macro.click()
         i += 1
 
     #bring back window after script end
@@ -61,19 +63,28 @@ def loadLine(i):
         if str.find('pressKey') == 0:
             list[i].set('pressKey')
             str = str.replace('pressKey ','')
+            text[i].insert(1.0,str)
+            #text[i]['state'] = 'normal'
             badAction = 0
         if str.find('loop') == 0:
             list[i].set('loop')
             str = str.replace('loop ','')
+            text[i].insert(1.0,str)
+            #text[i]['state'] = 'normal'
             badAction = 0
         if str.find('endloop') == 0:
             list[i].set('endloop')
             str = str.replace('endloop ','')
+            #text[i]['state'] = 'disabled'
+            badAction = 0
+        if str.find('click') == 0:
+            list[i].set('click')
+            str = str.replace('click ','')
+            #text[i]['state'] = 'disabled'
             badAction = 0
         if badAction == 1:
             list[i].set('')
         #load args for action
-        text[i].insert(1.0,str)
         f.close()
     except:
         #template for empty
@@ -99,7 +110,7 @@ def addRow(event):
         for i in range(size,size+1):
             #combobox for choosing options
             list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-            list[i]['values'] = ("","pressKey","loop","endloop")
+            list[i]['values'] = ("","pressKey","loop","endloop","click")
             #list[i].set("pressKey")
             list[i].pack()
             #textbox that loads script or sets up textbox
@@ -107,8 +118,12 @@ def addRow(event):
             #set template text
             if str(list[i-1].get()) == "pressKey":
                 text[i-1].insert('1.0',"keyToPress numberOfPresses intervalBetween")
-            if str(list[i-1].get()) == "loop":
+                #text[i-1]['state'] = 'normal'
+            elif str(list[i-1].get()) == "loop":
                 text[i-1].insert('1.0',"numberOfLoops")
+                #text[i-1]['state'] = 'normal'
+            #else:
+                #text[i-1]['state'] = 'disabled'
             text[i].pack()
             size+=1
         #unbind old list and bind new
@@ -172,7 +187,7 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("","pressKey","loop","endloop")
+        list[i]['values'] = ("","pressKey","loop","endloop","click")
         #list[i].set("pressKey")
         list[i].pack()
         #textbox that loads script or sets up textbox

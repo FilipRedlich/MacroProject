@@ -20,6 +20,9 @@ def pressKey(key,presses=1,interval=0.1):
     except KeyboardInterrupt:
         print("\nDone")
 
+def click():
+    pyautogui.click()
+
 if __name__ == '__main__':
     findMousePosition()
     #pressKey("F",3)
