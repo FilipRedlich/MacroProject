@@ -1,4 +1,5 @@
-loop 10
+loop 5
 pressKey E 2
 pressKey X 2
+wait 1
 endloop 
