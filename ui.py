@@ -48,6 +48,8 @@ def runcript():
                 if int(arg1) == 3:
                     arg1 = 'MIDDLE'
                 macro.click(arg1)
+            if list[i].get() == 'wait':
+                macro.wait(float(arg1))
             i += 1
         except:
             i += 1
@@ -91,7 +93,12 @@ def loadLine(i):
         if str.find('click') == 0:
             list[i].set('click')
             str = str.replace('click ','')
-            #text[i]['state'] = 'disabled'
+            #text[i]['state'] = 'enabled'
+            badAction = 0
+        if str.find('wait') == 0:
+            list[i].set('wait')
+            str = str.replace('wait ','')
+            #text[i]['state'] = 'enabled'
             badAction = 0
         if badAction == 1:
             list[i].set('')
@@ -110,8 +117,7 @@ def createScript():
     for i in range(0,size):
         getAction = str(list[i].get())
         getText = str(text[i].get('1.0','end'))
-        print(getText.find('keyToPress'))
-        if getText.find('keyToPress') == -1 and getText.find('numberOfLoops') == -1 and getText.find('mouseButton') == -1:
+        if getText.find('keyToPress') == -1 and getText.find('numberOfLoops') == -1 and getText.find('mouseButton') == -1 and getText.find('seconds') == -1:
             if str(list[i].get()) != "":
                 f.write(getAction+' '+getText)
     #close file
@@ -123,7 +129,7 @@ def addRow(event):
         for i in range(size,size+1):
             #combobox for choosing options
             list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-            list[i]['values'] = ("","pressKey","click","loop","endloop")
+            list[i]['values'] = ("","pressKey","click","wait","loop","endloop")
             list[i].state(["readonly"])
             #list[i].set("pressKey")
             list[i].pack()
@@ -203,7 +209,7 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("","pressKey","click","loop","endloop")
+        list[i]['values'] = ("","pressKey","click","wait","loop","endloop")
         list[i].state(["readonly"])
         #list[i].set("pressKey")
         list[i].pack()

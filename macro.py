@@ -1,3 +1,4 @@
+from time import sleep
 import pyautogui
 
 width, height = pyautogui.size()
@@ -22,6 +23,9 @@ def pressKey(key,presses=1,interval=0.1):
 
 def click(button='PRIMARY'):
     pyautogui.click(button=button)
+
+def wait(time=1):
+    sleep(time)
 
 if __name__ == '__main__':
     findMousePosition()
