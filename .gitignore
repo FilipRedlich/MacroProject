@@ -2,3 +2,4 @@ __pycache__
 ui.spec
 build
 dist
+test.py
