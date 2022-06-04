@@ -40,7 +40,13 @@ def runcript():
             if nrLoop == -1:
                 i = loop
         if list[i].get() == 'click':
-            macro.click()
+            if int(arg1) == 1:
+                arg1 = 'PRIMARY'
+            if int(arg1) == 2:
+                arg1 = 'SECONDARY'
+            if int(arg1) == 3:
+                arg1 = 'MIDDLE'
+            macro.click(arg1)
         i += 1
 
     #bring back window after script end
@@ -125,6 +131,8 @@ def addRow(event):
             elif str(list[i-1].get()) == "loop":
                 text[i-1].insert('1.0',"numberOfLoops")
                 #text[i-1]['state'] = 'normal'
+            elif str(list[i-1].get()) == "click":
+                text[i-1].insert('1.0',"mouseButton(1/2/3)")
             #else:
                 #text[i-1]['state'] = 'disabled'
             text[i].pack()

@@ -20,8 +20,8 @@ def pressKey(key,presses=1,interval=0.1):
     except KeyboardInterrupt:
         print("\nDone")
 
-def click():
-    pyautogui.click()
+def click(button='PRIMARY'):
+    pyautogui.click(button=button)
 
 if __name__ == '__main__':
     findMousePosition()
