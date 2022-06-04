@@ -78,7 +78,8 @@ def loadLine(i):
         f.close()
     except:
         #template for empty
-        text[i].insert('1.0',"key numberOfPresses interval")
+        0
+
 
 def createScript():
     #create custom script and add macro import
@@ -88,27 +89,32 @@ def createScript():
     for i in range(0,size):
         getAction = str(list[i].get())
         getText = str(text[i].get('1.0','end'))
-        if getText!="key numberOfPresses interval\n":
+        if str(list[i].get()) != "":
             f.write(getAction+' '+getText)
     #close file
     f.close()
 
 def addRow(event):
     global size
-    for i in range(size,size+1):
-        #combobox for choosing options
-        list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("pressKey","loop","endloop")
-        #list[i].set("pressKey")
-        list[i].pack()
-        #textbox that loads script or sets up textbox
-        text.append(tk.Text(scriptSpace2, height=1))
-        loadLine(i)
-        text[i].pack()
-        size+=1
-    #unbind old list and bind new
-    list[size-2].unbind('<<ComboboxSelected>>')
-    list[size-1].bind('<<ComboboxSelected>>', addRow)
+    if str(list[size-1].get()) != "":
+        for i in range(size,size+1):
+            #combobox for choosing options
+            list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
+            list[i]['values'] = ("","pressKey","loop","endloop")
+            #list[i].set("pressKey")
+            list[i].pack()
+            #textbox that loads script or sets up textbox
+            text.append(tk.Text(scriptSpace2, height=1))
+            #set template text
+            if str(list[i-1].get()) == "pressKey":
+                text[i-1].insert('1.0',"key numberOfPresses interval")
+            if str(list[i-1].get()) == "loop":
+                text[i-1].insert('1.0',"numberOfLoops")
+            text[i].pack()
+            size+=1
+        #unbind old list and bind new
+        list[size-2].unbind('<<ComboboxSelected>>')
+        list[size-1].bind('<<ComboboxSelected>>', addRow)
 
 if __name__ == '__main__':
     #bind main window to root
@@ -167,7 +173,7 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("pressKey","loop","endloop")
+        list[i]['values'] = ("","pressKey","loop","endloop")
         #list[i].set("pressKey")
         list[i].pack()
         #textbox that loads script or sets up textbox
