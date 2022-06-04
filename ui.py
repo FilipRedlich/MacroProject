@@ -28,7 +28,9 @@ def loadLine(i):
         #load saved script (clear window then load from file)
         text[i].delete('1.0','end')
         temp = f.read().splitlines()
+        #skip first 2 lines
         str = temp[i+2]
+        #load action to list depending on action in script
         badAction = 1
         if str.find('pressKey') == 0:
             list[i].set('pressKey')
@@ -40,9 +42,11 @@ def loadLine(i):
             badAction = 0
         if badAction == 1:
             list[i].set('')
+        #load args for action
         text[i].insert(1.0,str)
         f.close()
     except:
+        #template for empty
         text[i].insert('1.0',"('key',numberOfPresses,interval)")
 
 def createScript():
