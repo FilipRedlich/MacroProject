@@ -37,6 +37,8 @@ def runcript():
             if nrLoop > 0:
                 i = loop
                 nrLoop -= 1
+            if nrLoop == -1:
+                i = loop
         if list[i].get() == 'click':
             macro.click()
         i += 1
