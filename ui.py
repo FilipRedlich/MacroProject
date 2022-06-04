@@ -171,26 +171,34 @@ if __name__ == '__main__':
     bgCanvas.pack()
 
     #add canvas inside main window
-    mainCanvas = tk.Canvas(root, bg="black")
+    mainCanvas = tk.Frame(root, bg="black")
     mainCanvas.place(relwidth=0.9,relheight=0.9,relx=0.05,rely=0.05)
+    mainCanvas.grid_rowconfigure(0, weight=1)
+    mainCanvas.grid_columnconfigure(0, weight=1)
 
     #add button on bottom side of the window that run functions
     runFile = tk.Button(mainCanvas, text="Run Script", fg="black", bg="white", padx=7, pady=3, command=runcript)
-    runFile.pack(fill="both",side='bottom')
+    runFile.grid(row=1,column=0,columnspan=2,sticky="news")
 
     openFile = tk.Button(mainCanvas, text="Load Script", fg="black", bg="white", padx=7, pady=3, command=loadScript)
-    openFile.pack(fill="both",side='bottom')
+    openFile.grid(row=2,column=0,columnspan=2,sticky="news")
 
     saveFile = tk.Button(mainCanvas, text="Create Script", fg="black", bg="white", padx=7, pady=3, command=createScript)
-    saveFile.pack(fill="both",side='bottom')
+    saveFile.grid(row=3,column=0,columnspan=2,sticky="news")
 
     #add interactive space to modify custom script
-    scriptSpace = tk.Canvas(mainCanvas, bg='white')
-    scriptSpace.place(relwidth=1,relheight=0.79)
+    scrollSpace = tk.Canvas(mainCanvas, bg='white')
+    scrollSpace.grid(row=0,column=0, sticky="news")
     
-    scriptSpace.columnconfigure(0,weight=1)
-    scriptSpace.columnconfigure(1,weight=6)
+    scrollSpace.columnconfigure(0,weight=1)
+    scrollSpace.columnconfigure(1,weight=6)
 
+    vsb = tk.Scrollbar(mainCanvas, orient="vertical", command=scrollSpace.yview)
+    vsb.grid(row=0, column=1, sticky='ns')
+    scrollSpace.configure(yscrollcommand=vsb.set)
+
+    scriptSpace = tk.Frame(scrollSpace, bg="white")
+    scrollSpace.create_window((0, 0), window=scriptSpace, anchor='nw')
 
     #description to rows
     descText1 = tk.Text(scriptSpace, height=1, width=15)
@@ -220,5 +228,7 @@ if __name__ == '__main__':
 
     #listener for select
     list[size-1].bind('<<ComboboxSelected>>', addRow)
-    #loop and refresh window 
+    #set the canvas scrolling region
+    scrollSpace.config(scrollregion=scrollSpace.bbox("all"))
+    #launch the GUI
     root.mainloop()
