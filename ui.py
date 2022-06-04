@@ -22,32 +22,35 @@ def runcript():
         space2 = args.find(' ')
         arg2 = args[:space2]
         arg3 = args[space2+1:]
-        #run function depending on the number of args
-        if list[i].get() == 'pressKey':
-            if(space == -1):
-                macro.pressKey(str(arg1))
-            elif(space2 == -1):
-                macro.pressKey(str(arg1),int(arg2))
-            else:
-                macro.pressKey(str(arg1),int(arg2),float(arg3))
-        if list[i].get() == 'loop':
-            loop = i
-            nrLoop = int(arg1)
-        if list[i].get() == 'endloop':
-            if nrLoop > 0:
-                i = loop
-                nrLoop -= 1
-            if nrLoop == -1:
-                i = loop
-        if list[i].get() == 'click':
-            if int(arg1) == 1:
-                arg1 = 'PRIMARY'
-            if int(arg1) == 2:
-                arg1 = 'SECONDARY'
-            if int(arg1) == 3:
-                arg1 = 'MIDDLE'
-            macro.click(arg1)
-        i += 1
+        try:
+            #run function depending on the number of args
+            if list[i].get() == 'pressKey':
+                if(space == -1):
+                    macro.pressKey(str(arg1))
+                elif(space2 == -1):
+                    macro.pressKey(str(arg1),int(arg2))
+                else:
+                    macro.pressKey(str(arg1),int(arg2),float(arg3))
+            if list[i].get() == 'loop':
+                loop = i
+                nrLoop = int(arg1)
+            if list[i].get() == 'endloop':
+                if nrLoop > 0:
+                    i = loop
+                    nrLoop -= 1
+                if nrLoop == -1:
+                    i = loop
+            if list[i].get() == 'click':
+                if int(arg1) == 1:
+                    arg1 = 'PRIMARY'
+                if int(arg1) == 2:
+                    arg1 = 'SECONDARY'
+                if int(arg1) == 3:
+                    arg1 = 'MIDDLE'
+                macro.click(arg1)
+            i += 1
+        except:
+            i += 1
 
     #bring back window after script end
     root.deiconify()
