@@ -1,17 +1,35 @@
 import tkinter as tk
 from tkinter import ttk
 import subprocess
+import macro
 
 def runcript():
     #hide window
     root.iconify()
     #save current script
-    createScript()
-    #run custon script
-    p = subprocess.Popen('python customScript.pyw', creationflags = subprocess.CREATE_NO_WINDOW)
-    #p = os.popen('python customScript.pyw')
-    #wait for end of script
-    p.communicate()
+    #createScript()
+    
+    global size
+    for i in range(0,size):
+        if list[i].get() == 'pressKey':
+            args = str(text[i].get('1.0','end'))
+            space = args.find(' ')
+            arg1 = args[:space]
+            args = args[space+1:]
+            space2 = args.find(' ')
+            arg2 = args[:space2]
+            arg3 = args[space2+1:]
+            print(str(space)+"|"+str(space2))
+            print(arg1+"|"+arg2+"|"+arg3)
+            if(space == -1):
+                macro.pressKey(str(arg1))
+            elif(space2 == -1):
+                macro.pressKey(str(arg1),int(arg2))
+            else:
+                macro.pressKey(str(arg1),int(arg2),int(arg3))
+        if list[i].get() == 'testFunc':
+            0
+
     #subprocess.Popen('del macro.py', creationflags = subprocess.CREATE_NO_WINDOW)
     #bring back window after script end
     root.deiconify()
