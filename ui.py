@@ -11,7 +11,10 @@ def runcript():
     
     #execute action with args
     global size
-    for i in range(0,size):
+    loop = 0
+    nrLoop = 0
+    i = 0
+    while i < size:
         #get the arguments from text
         args = str(text[i].get('1.0','end'))
         space = args.find(' ')
@@ -28,8 +31,14 @@ def runcript():
                 macro.pressKey(str(arg1),int(arg2))
             else:
                 macro.pressKey(str(arg1),int(arg2),float(arg3))
-        if list[i].get() == 'testFunc':
-            0
+        if list[i].get() == 'loop':
+            loop = i
+            nrLoop = int(arg1)
+        if list[i].get() == 'endloop':
+            if nrLoop > 0:
+                i = loop
+                nrLoop -= 1
+        i += 1
 
     #bring back window after script end
     root.deiconify()
@@ -54,9 +63,13 @@ def loadLine(i):
             list[i].set('pressKey')
             str = str.replace('pressKey ','')
             badAction = 0
-        if str.find('testFunc') == 0:
-            list[i].set('testFunc')
-            str = str.replace('testFunc ','')
+        if str.find('loop') == 0:
+            list[i].set('loop')
+            str = str.replace('loop ','')
+            badAction = 0
+        if str.find('endloop') == 0:
+            list[i].set('endloop')
+            str = str.replace('endloop ','')
             badAction = 0
         if badAction == 1:
             list[i].set('')
@@ -85,7 +98,7 @@ def addRow(event):
     for i in range(size,size+1):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("pressKey","testFunc")
+        list[i]['values'] = ("pressKey","loop","endloop")
         #list[i].set("pressKey")
         list[i].pack()
         #textbox that loads script or sets up textbox
@@ -154,7 +167,7 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("pressKey","testFunc")
+        list[i]['values'] = ("pressKey","loop","endloop")
         #list[i].set("pressKey")
         list[i].pack()
         #textbox that loads script or sets up textbox

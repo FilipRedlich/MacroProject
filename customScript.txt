@@ -1,2 +1,4 @@
-pressKey X 10
-pressKey E 5 0.2
+loop 10
+pressKey E 2
+pressKey X 2
+endloop 
