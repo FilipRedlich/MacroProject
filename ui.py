@@ -6,8 +6,8 @@ import macro
 def runcript():
     #hide window
     root.iconify()
-    #save current script
-    #createScript()
+    #save current script before running
+    createScript()
     
     #execute action with args
     global size
