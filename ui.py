@@ -129,13 +129,13 @@ def addRow(event):
     if str(list[size-1].get()) != "":
         for i in range(size,size+1):
             #combobox for choosing options
-            list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
+            list.append(ttk.Combobox(scriptSpace, textvariable=tk.StringVar()))
             list[i]['values'] = ("","pressKey","click","wait","loop","endloop")
             list[i].state(["readonly"])
             #list[i].set("pressKey")
-            list[i].pack()
+            list[i].grid(column=0,row=i+1)
             #textbox that loads script or sets up textbox
-            text.append(tk.Text(scriptSpace2, height=1))
+            text.append(tk.Text(scriptSpace, height=1))
             #set template text
             if str(list[i-1].get()) == "pressKey":
                 text[i-1].insert('1.0',"keyToPress numberOfPresses intervalBetween")
@@ -147,7 +147,7 @@ def addRow(event):
                 text[i-1].insert('1.0',"mouseButton(1/2/3)")
             #else:
                 #text[i-1]['state'] = 'disabled'
-            text[i].pack()
+            text[i].grid(column=1,row=i+1)
             size+=1
         #unbind old list and bind new
         list[size-2].unbind('<<ComboboxSelected>>')
@@ -187,38 +187,36 @@ if __name__ == '__main__':
     #add interactive space to modify custom script
     scriptSpace = tk.Canvas(mainCanvas, bg='white')
     scriptSpace.place(relwidth=1,relheight=0.79)
-
-    #divided main scace in 2 parts
-    scriptSpace1 = tk.Canvas(scriptSpace, bg='white')
-    scriptSpace1.place(relwidth=0.2)
-    scriptSpace2 = tk.Canvas(scriptSpace, bg='white')
-    scriptSpace2.place(relwidth=0.8,relx=0.2)
     
+    scriptSpace.columnconfigure(0,weight=1)
+    scriptSpace.columnconfigure(1,weight=6)
 
 
     #description to rows
-    descText1 = tk.Text(scriptSpace1, height=1, width=15)
+    descText1 = tk.Text(scriptSpace, height=1, width=15)
     descText1.insert('1.0','Action')
     descText1['state'] = 'disabled'
-    descText1.pack()
-    descText2 = tk.Text(scriptSpace2, height=1)
+    descText1.grid(column=0,row=0)
+    #descText1.pack()
+    descText2 = tk.Text(scriptSpace, height=1)
     descText2.insert('1.0','Args')
     descText2['state'] = 'disabled'
-    descText2.pack()
+    descText2.grid(column=1,row=0)
+    #descText2.pack()
 
     text=[]
     list=[]
     for i in range(0,size):
         #combobox for choosing options
-        list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
+        list.append(ttk.Combobox(scriptSpace, textvariable=tk.StringVar()))
         list[i]['values'] = ("","pressKey","click","wait","loop","endloop")
         list[i].state(["readonly"])
         #list[i].set("pressKey")
-        list[i].pack()
+        list[i].grid(column=0,row=i+1)
         #textbox that loads script or sets up textbox
-        text.append(tk.Text(scriptSpace2, height=1))
+        text.append(tk.Text(scriptSpace, height=1))
         loadLine(i)
-        text[i].pack()
+        text[i].grid(column=1,row=i+1)
 
     #listener for select
     list[size-1].bind('<<ComboboxSelected>>', addRow)
