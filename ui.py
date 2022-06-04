@@ -9,28 +9,26 @@ def runcript():
     #save current script
     #createScript()
     
+    #execute action with args
     global size
     for i in range(0,size):
+        args = str(text[i].get('1.0','end'))
+        space = args.find(' ')
+        arg1 = args[:space]
+        args = args[space+1:]
+        space2 = args.find(' ')
+        arg2 = args[:space2]
+        arg3 = args[space2+1:]
         if list[i].get() == 'pressKey':
-            args = str(text[i].get('1.0','end'))
-            space = args.find(' ')
-            arg1 = args[:space]
-            args = args[space+1:]
-            space2 = args.find(' ')
-            arg2 = args[:space2]
-            arg3 = args[space2+1:]
-            print(str(space)+"|"+str(space2))
-            print(arg1+"|"+arg2+"|"+arg3)
             if(space == -1):
                 macro.pressKey(str(arg1))
             elif(space2 == -1):
                 macro.pressKey(str(arg1),int(arg2))
             else:
-                macro.pressKey(str(arg1),int(arg2),int(arg3))
+                macro.pressKey(str(arg1),int(arg2),float(arg3))
         if list[i].get() == 'testFunc':
             0
 
-    #subprocess.Popen('del macro.py', creationflags = subprocess.CREATE_NO_WINDOW)
     #bring back window after script end
     root.deiconify()
 
@@ -42,21 +40,21 @@ def loadScript():
 def loadLine(i):
     try:
         #read file
-        f = open("customScript.pyw", "r")
+        f = open("customScript.txt", "r")
         #load saved script (clear window then load from file)
         text[i].delete('1.0','end')
         temp = f.read().splitlines()
         #skip first 2 lines
-        str = temp[i+2]
+        str = temp[i]
         #load action to list depending on action in script
         badAction = 1
         if str.find('pressKey') == 0:
             list[i].set('pressKey')
-            str = str.replace('pressKey','')
+            str = str.replace('pressKey ','')
             badAction = 0
         if str.find('testFunc') == 0:
             list[i].set('testFunc')
-            str = str.replace('testFunc','')
+            str = str.replace('testFunc ','')
             badAction = 0
         if badAction == 1:
             list[i].set('')
@@ -65,20 +63,18 @@ def loadLine(i):
         f.close()
     except:
         #template for empty
-        text[i].insert('1.0',"('key',numberOfPresses,interval)")
+        text[i].insert('1.0',"key numberOfPresses interval")
 
 def createScript():
     #create custom script and add macro import
-    f = open("customScript.pyw", "w")
-    f.write("from macro import *\n\n")
+    f = open("customScript.txt", "w")
+    #f.write("from macro import *\n\n")
     global size
     for i in range(0,size):
         getAction = str(list[i].get())
         getText = str(text[i].get('1.0','end'))
-        ff = getText.find('(')
-        getText = getText[ff:]
-        if getText!="('key',numberOfPresses,interval)\n" and ff!=-1:
-            f.write(getAction+getText)
+        if getText!="key numberOfPresses interval\n":
+            f.write(getAction+' '+getText)
     #close file
     f.close()
 
@@ -102,10 +98,10 @@ if __name__ == '__main__':
     #bind main window to root
     root = tk.Tk('Macro')
     try:
-        with open("customScript.pyw", 'r') as fp:
+        with open("customScript.txt", 'r') as fp:
             for count, line in enumerate(fp):
                 pass
-        size = count
+        size = count+2
     except:
         size=1
 
