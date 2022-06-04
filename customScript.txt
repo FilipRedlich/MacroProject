@@ -1,0 +1,2 @@
+pressKey X 10
+pressKey E 5 0.2
