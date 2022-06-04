@@ -69,7 +69,6 @@ def loadLine(i):
         #load saved script (clear window then load from file)
         text[i].delete('1.0','end')
         temp = f.read().splitlines()
-        #skip first 2 lines
         str = temp[i]
         #load action to list depending on action in script
         badAction = 1
@@ -93,11 +92,13 @@ def loadLine(i):
         if str.find('click') == 0:
             list[i].set('click')
             str = str.replace('click ','')
+            text[i].insert(1.0,str)
             #text[i]['state'] = 'enabled'
             badAction = 0
         if str.find('wait') == 0:
             list[i].set('wait')
             str = str.replace('wait ','')
+            text[i].insert(1.0,str)
             #text[i]['state'] = 'enabled'
             badAction = 0
         if badAction == 1:
