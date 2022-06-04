@@ -110,7 +110,7 @@ def addRow(event):
         for i in range(size,size+1):
             #combobox for choosing options
             list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-            list[i]['values'] = ("","pressKey","loop","endloop","click")
+            list[i]['values'] = ("","pressKey","click","loop","endloop")
             #list[i].set("pressKey")
             list[i].pack()
             #textbox that loads script or sets up textbox
@@ -187,7 +187,7 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace1, textvariable=tk.StringVar()))
-        list[i]['values'] = ("","pressKey","loop","endloop","click")
+        list[i]['values'] = ("","pressKey","click","loop","endloop")
         #list[i].set("pressKey")
         list[i].pack()
         #textbox that loads script or sets up textbox
