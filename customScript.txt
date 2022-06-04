@@ -1,3 +1,4 @@
 loop 10
 pressKey E 2
+pressKey X 2
 endloop 
