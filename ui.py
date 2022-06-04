@@ -129,7 +129,7 @@ if __name__ == '__main__':
 
     #add interactive space to modify custom script
     scriptSpace = tk.Canvas(mainCanvas, bg='white')
-    scriptSpace.place(relwidth=1,relheight=0.83)
+    scriptSpace.place(relwidth=1,relheight=0.79)
 
     #divided main scace in 2 parts
     scriptSpace1 = tk.Canvas(scriptSpace, bg='white')
