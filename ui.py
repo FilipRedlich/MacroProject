@@ -12,6 +12,7 @@ def runcript():
     #execute action with args
     global size
     for i in range(0,size):
+        #get the arguments from text
         args = str(text[i].get('1.0','end'))
         space = args.find(' ')
         arg1 = args[:space]
@@ -19,6 +20,7 @@ def runcript():
         space2 = args.find(' ')
         arg2 = args[:space2]
         arg3 = args[space2+1:]
+        #run function depending on the number of args
         if list[i].get() == 'pressKey':
             if(space == -1):
                 macro.pressKey(str(arg1))
@@ -91,12 +93,14 @@ def addRow(event):
         loadLine(i)
         text[i].pack()
         size+=1
+    #unbind old list and bind new
     list[size-2].unbind('<<ComboboxSelected>>')
     list[size-1].bind('<<ComboboxSelected>>', addRow)
 
 if __name__ == '__main__':
     #bind main window to root
     root = tk.Tk('Macro')
+    #try to get size from file if exist if not size=1
     try:
         with open("customScript.txt", 'r') as fp:
             for count, line in enumerate(fp):
