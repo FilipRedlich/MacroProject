@@ -107,7 +107,7 @@ def addRow(event):
             text.append(tk.Text(scriptSpace2, height=1))
             #set template text
             if str(list[i-1].get()) == "pressKey":
-                text[i-1].insert('1.0',"key numberOfPresses interval")
+                text[i-1].insert('1.0',"keyToPress numberOfPresses intervalBetween")
             if str(list[i-1].get()) == "loop":
                 text[i-1].insert('1.0',"numberOfLoops")
             text[i].pack()
