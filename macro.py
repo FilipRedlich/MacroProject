@@ -28,6 +28,14 @@ def click(button='PRIMARY',clicks=1,interval=0.1):
     else:
         pyautogui.click(button=button,clicks=clicks,interval=interval)
 
+def clickPlace(x,y,button='PRIMARY'):
+    pyautogui.click(x=x,y=y,button=button)
+
+def getPlace():
+    sleep(5)
+    x, y = pyautogui.position()
+    return x,y
+
 def wait(time=1):
     sleep(time)
 

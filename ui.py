@@ -55,6 +55,21 @@ def runcript():
                     macro.click(str(arg1),int(arg2))
                 else:
                     macro.click(str(arg1),int(arg2),float(arg3))
+            if list[i].get() == 'clickPlace':
+                if int(arg3) == 1:
+                    arg3 = 'PRIMARY'
+                elif int(arg3) == 2:
+                    arg3 = 'SECONDARY'
+                elif int(arg3) == 3:
+                    arg3 = 'MIDDLE'
+                else:
+                    arg3 = 'PRIMARY'
+                if(space == -1):
+                    macro.clickPlace(int(arg1))
+                elif(space2 == -1):
+                    macro.clickPlace(int(arg1),int(arg2))
+                else:
+                    macro.clickPlace(int(arg1),int(arg2),str(arg3))
             if list[i].get() == 'wait':
                 macro.wait(float(arg1))
             i += 1
@@ -102,6 +117,12 @@ def loadLine(i):
             text[i].insert(1.0,str)
             #text[i]['state'] = 'enabled'
             badAction = 0
+        if str.find('clickPlace') == 0:
+            list[i].set('clickPlace')
+            str = str.replace('clickPlace ','')
+            text[i].insert(1.0,str)
+            #text[i]['state'] = 'enabled'
+            badAction = 0
         if str.find('wait') == 0:
             list[i].set('wait')
             str = str.replace('wait ','')
@@ -137,7 +158,7 @@ def addRow(event):
         for i in range(size,size+1):
             #combobox for choosing options
             list.append(ttk.Combobox(scriptSpace, textvariable=tk.StringVar()))
-            list[i]['values'] = ("","pressKey","click","wait","loop","endloop")
+            list[i]['values'] = ("","pressKey","click","clickPlace","wait","loop","endloop")
             list[i].state(["readonly"])
             #list[i].set("pressKey")
             list[i].grid(column=0,row=i+1)
@@ -151,7 +172,10 @@ def addRow(event):
                 text[i-1].insert('1.0',"numberOfLoops")
                 #text[i-1]['state'] = 'normal'
             elif str(list[i-1].get()) == "click":
-                text[i-1].insert('1.0',"mouseButton(1/2/3)")
+                text[i-1].insert('1.0',"mouseButton(1/2/3) numberOfClicks interval")
+            elif str(list[i-1].get()) == "clickPlace":
+                x,y = macro.getPlace()
+                text[i-1].insert('1.0',str(x)+" "+str(y)+" mouseButton(1/2/3)")
             #else:
                 #text[i-1]['state'] = 'disabled'
             text[i].grid(column=1,row=i+1)
@@ -229,7 +253,7 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace, textvariable=tk.StringVar()))
-        list[i]['values'] = ("","pressKey","click","wait","loop","endloop")
+        list[i]['values'] = ("","pressKey","click","clickPlace","wait","loop","endloop")
         list[i].state(["readonly"])
         #list[i].set("pressKey")
         list[i].grid(column=0,row=i+1)
