@@ -205,11 +205,11 @@ if __name__ == '__main__':
         size=1
 
     #create main window and add background to it
-    bgCanvas = tk.Canvas(root, height=600, width=600, bg="lightblue")
+    bgCanvas = tk.Canvas(root, height=600, width=600)
     bgCanvas.pack()
 
     #add canvas inside main window
-    mainCanvas = tk.Frame(root, bg="black")
+    mainCanvas = tk.Frame(root, bg="white")
     mainCanvas.place(relwidth=0.9,relheight=0.9,relx=0.05,rely=0.05)
     mainCanvas.grid_rowconfigure(0, weight=1)
     mainCanvas.grid_columnconfigure(0, weight=1)
