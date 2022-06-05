@@ -22,7 +22,11 @@ def pressKey(key,presses=1,interval=0.1):
         print("\nDone")
 
 def click(button='PRIMARY',clicks=1,interval=0.1):
-    pyautogui.click(button=button,clicks=clicks,interval=interval)
+    if clicks == -1:
+        while True:
+            pyautogui.click(button=button,clicks=1000,interval=interval)
+    else:
+        pyautogui.click(button=button,clicks=clicks,interval=interval)
 
 def wait(time=1):
     sleep(time)
