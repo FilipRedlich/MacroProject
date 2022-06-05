@@ -21,8 +21,8 @@ def pressKey(key,presses=1,interval=0.1):
     except KeyboardInterrupt:
         print("\nDone")
 
-def click(button='PRIMARY'):
-    pyautogui.click(button=button)
+def click(button='PRIMARY',clicks=1,interval=0.1):
+    pyautogui.click(button=button,clicks=clicks,interval=interval)
 
 def wait(time=1):
     sleep(time)

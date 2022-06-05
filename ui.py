@@ -43,11 +43,18 @@ def runcript():
             if list[i].get() == 'click':
                 if int(arg1) == 1:
                     arg1 = 'PRIMARY'
-                if int(arg1) == 2:
+                elif int(arg1) == 2:
                     arg1 = 'SECONDARY'
-                if int(arg1) == 3:
+                elif int(arg1) == 3:
                     arg1 = 'MIDDLE'
-                macro.click(arg1)
+                else:
+                    arg1 = 'PRIMARY'
+                if(space == -1):
+                    macro.click(str(arg1))
+                elif(space2 == -1):
+                    macro.click(str(arg1),int(arg2))
+                else:
+                    macro.click(str(arg1),int(arg2),float(arg3))
             if list[i].get() == 'wait':
                 macro.wait(float(arg1))
             i += 1
