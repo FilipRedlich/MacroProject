@@ -41,20 +41,20 @@ def runcript():
                 if nrLoop == -1:
                     i = loop
             if list[i].get() == 'click':
-                if int(arg1) == 1:
-                    arg1 = 'PRIMARY'
-                elif int(arg1) == 2:
-                    arg1 = 'SECONDARY'
-                elif int(arg1) == 3:
-                    arg1 = 'MIDDLE'
+                if int(arg3) == 1:
+                    arg3 = 'PRIMARY'
+                elif int(arg3) == 2:
+                    arg3 = 'SECONDARY'
+                elif int(arg3) == 3:
+                    arg3 = 'MIDDLE'
                 else:
-                    arg1 = 'PRIMARY'
+                    arg3 = 'PRIMARY'
                 if(space == -1):
-                    macro.click(str(arg1))
+                    macro.click(int(arg1))
                 elif(space2 == -1):
-                    macro.click(str(arg1),int(arg2))
+                    macro.click(int(arg1),float(arg2))
                 else:
-                    macro.click(str(arg1),int(arg2),float(arg3))
+                    macro.click(int(arg1),float(arg2),str(arg3))
             if list[i].get() == 'clickPlace':
                 if int(arg3) == 1:
                     arg3 = 'PRIMARY'
@@ -172,11 +172,11 @@ def addRow(event):
                 text[i-1].insert('1.0',"numberOfLoops")
                 #text[i-1]['state'] = 'normal'
             elif str(list[i-1].get()) == "click":
-                text[i-1].insert('1.0',"mouseButton(1/2/3) numberOfClicks interval")
+                text[i-1].insert('1.0',"numberOfClicks interval mouseButton(1/2/3)")
             elif str(list[i-1].get()) == "clickPlace":
                 root.iconify()
                 x,y = macro.getPlace()
-                text[i-1].insert('1.0',str(x)+" "+str(y)+" mouseButton(1/2/3)")
+                text[i-1].insert('1.0',str(x)+" "+str(y))
                 root.deiconify()
             #else:
                 #text[i-1]['state'] = 'disabled'

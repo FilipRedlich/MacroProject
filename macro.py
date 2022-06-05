@@ -21,12 +21,12 @@ def pressKey(key,presses=1,interval=0.1):
     except KeyboardInterrupt:
         print("\nDone")
 
-def click(button='PRIMARY',clicks=1,interval=0.1):
+def click(clicks=1,interval=0.1,button='PRIMARY'):
     if clicks == -1:
         while True:
-            pyautogui.click(button=button,clicks=1000,interval=interval)
+            pyautogui.click(clicks=1000,interval=interval,button=button)
     else:
-        pyautogui.click(button=button,clicks=clicks,interval=interval)
+        pyautogui.click(clicks=clicks,interval=interval,button=button)
 
 def clickPlace(x,y,button='PRIMARY'):
     pyautogui.click(x=x,y=y,button=button)
