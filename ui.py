@@ -174,8 +174,10 @@ def addRow(event):
             elif str(list[i-1].get()) == "click":
                 text[i-1].insert('1.0',"mouseButton(1/2/3) numberOfClicks interval")
             elif str(list[i-1].get()) == "clickPlace":
+                root.iconify()
                 x,y = macro.getPlace()
                 text[i-1].insert('1.0',str(x)+" "+str(y)+" mouseButton(1/2/3)")
+                root.deiconify()
             #else:
                 #text[i-1]['state'] = 'disabled'
             text[i].grid(column=1,row=i+1)
@@ -198,7 +200,7 @@ if __name__ == '__main__':
         with open("customScript.txt", 'r') as fp:
             for count, line in enumerate(fp):
                 pass
-        size = count+10
+        size = count+2
     except:
         size=1
 
