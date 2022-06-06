@@ -34,7 +34,7 @@ def runcript():
             if list[i].get() == 'loop':
                 loop = i
                 nrLoop = int(arg1)
-            if list[i].get() == 'endloop':
+            if list[i].get() == 'endLoop':
                 if nrLoop > 0:
                     i = loop
                     nrLoop -= 1
@@ -106,9 +106,9 @@ def loadLine(i):
             text[i].insert(1.0,str)
             #text[i]['state'] = 'normal'
             badAction = 0
-        if str.find('endloop') == 0:
-            list[i].set('endloop')
-            str = str.replace('endloop ','')
+        if str.find('endLoop') == 0:
+            list[i].set('endLoop')
+            str = str.replace('endLoop ','')
             #text[i]['state'] = 'disabled'
             badAction = 0
         if str.find('click') == 0:
@@ -158,7 +158,7 @@ def addRow(event):
         for i in range(size,size+1):
             #combobox for choosing options
             list.append(ttk.Combobox(scriptSpace, textvariable=tk.StringVar()))
-            list[i]['values'] = ("","pressKey","click","clickPlace","wait","loop","endloop")
+            list[i]['values'] = ("","pressKey","click","clickPlace","wait","loop","endLoop")
             list[i].state(["readonly"])
             #list[i].set("pressKey")
             list[i].grid(column=0,row=i+1)
@@ -255,7 +255,7 @@ if __name__ == '__main__':
     for i in range(0,size):
         #combobox for choosing options
         list.append(ttk.Combobox(scriptSpace, textvariable=tk.StringVar()))
-        list[i]['values'] = ("","pressKey","click","clickPlace","wait","loop","endloop")
+        list[i]['values'] = ("","pressKey","click","clickPlace","wait","loop","endLoop")
         list[i].state(["readonly"])
         #list[i].set("pressKey")
         list[i].grid(column=0,row=i+1)
