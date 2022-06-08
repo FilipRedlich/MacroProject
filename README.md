@@ -1,1 +1,1 @@
-pyinstaller --noconsole --onefile ui.py
+Small app to make custom scripts/macros made in python.
